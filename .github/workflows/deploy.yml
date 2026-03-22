@@ -19,7 +19,7 @@ jobs:
       id: dotnet
       uses: actions/setup-dotnet@v4.3.1
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
 
     # Note: Unless a concrete version is specified in the `global.json` file,
     # the latest .NET version installed on the runner (including preinstalled
@@ -41,4 +41,4 @@ jobs:
 
     - name: publish
       run: |
-        dotnet nuget push **/*.nupkg --source 'https://api.nuget.org/v3/index.json' --skip-duplicate -k ${{ secrets.nuget }}
+        dotnet nuget push **/Squidex*.nupkg --source 'https://api.nuget.org/v3/index.json' --skip-duplicate -k ${{ secrets.nuget }}

@@ -32,8 +32,8 @@ public sealed class DefaultFlowExecutor<TContext>(
     public async Task ValidateAsync(FlowDefinition definition, AddError addError,
         CancellationToken ct)
     {
-        ArgumentNullException.ThrowIfNull(nameof(definition));
-        ArgumentNullException.ThrowIfNull(nameof(addError));
+        ArgumentNullException.ThrowIfNull(definition);
+        ArgumentNullException.ThrowIfNull(addError);
 
         if (definition.Steps.Count == 0)
         {
@@ -80,8 +80,8 @@ public sealed class DefaultFlowExecutor<TContext>(
     public async Task ValidateAsync(FlowStep step, AddError addError,
         CancellationToken ct)
     {
-        ArgumentNullException.ThrowIfNull(nameof(step));
-        ArgumentNullException.ThrowIfNull(nameof(addError));
+        ArgumentNullException.ThrowIfNull(step);
+        ArgumentNullException.ThrowIfNull(addError);
 
         await ValidateCoreAsync(step, new FlowValidationContext(serviceProvider, null), addError, ct);
     }
@@ -115,13 +115,10 @@ public sealed class DefaultFlowExecutor<TContext>(
 
     public FlowExecutionState<TContext> CreateState(CreateFlowInstanceRequest<TContext> request)
     {
-        ArgumentNullException.ThrowIfNull(nameof(request.Definition));
-        ArgumentNullException.ThrowIfNull(nameof(request.Context));
-        ArgumentNullException.ThrowIfNull(nameof(request.ScheduleKey));
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(request.OwnerId));
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(request.DefinitionId));
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(request.Description));
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(request.ScheduleKey));
+        ArgumentNullException.ThrowIfNull(request.Definition);
+        ArgumentNullException.ThrowIfNull(request.Context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(request.OwnerId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(request.DefinitionId);
 
         if (request.Definition.Steps.Count == 0)
         {
@@ -163,7 +160,7 @@ public sealed class DefaultFlowExecutor<TContext>(
     public async Task SimulateAsync(FlowExecutionState<TContext> state,
         CancellationToken ct)
     {
-        ArgumentNullException.ThrowIfNull(nameof(state));
+        ArgumentNullException.ThrowIfNull(state);
 
         while (true)
         {
@@ -179,7 +176,7 @@ public sealed class DefaultFlowExecutor<TContext>(
     public async Task ExecuteAsync(FlowExecutionState<TContext> state,
         CancellationToken ct)
     {
-        ArgumentNullException.ThrowIfNull(nameof(state));
+        ArgumentNullException.ThrowIfNull(state);
 
         try
         {
